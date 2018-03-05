@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-auto">
+        <img src="{{ movie.poster }}">
+    </div>
+    <div class="col">
+        <div class="card padding">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3><a>{{ movie.title }} ({{ movie.year }})</a></h3>
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item"><a>{{ movie.genre }}</a></li>
+                    </ul>
+                    <p class="shortened">{{ movie.plot }}</p>
+
+                    <div id="people">
+                        <strong>Directing:</strong>
+                        <ul class="list-unstyled list-inline">
+                            <li>{{ movie.director }}</li>
+                        </ul>
+                        <strong>Writing:</strong>
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item">{{ movie.writer }}</li>
+                        </ul>
+                        <strong>Stars:</strong>
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a>{{ movie.actors }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4" id="sub-details">
+
+                    <strong>Release Date: </strong><span>{{ movie.released }}</span><br>
+
+                    <div class="ratings" *ngFor="let rating of movie.ratings">
+                        <span class="raty-text" style="vertical-align: top">{{ rating.source }}: {{ rating.value }}</span>
+                    </div>
+
+                    <ul class="list-unstyled">
+                        <li><strong>Country: </strong><span>{{ movie.country }}</span></li>
+                        <li><strong>Language: </strong><span>{{ movie.language }}</span></li>
+                        <li><strong>Runtime: </strong><span>{{ movie.runtime }}</span></li>
+                        <li><strong>Box Office: </strong><span>{{ movie.box_office }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

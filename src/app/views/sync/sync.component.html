@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="card-header">
+        <h1 class="h5 m-0">Movies</h1>
+    </div>
+    <div class="card-block">
+        <header class="padding-bottom">
+            <button type="button" class="btn btn-primary btn-sm" (click)="openModal(create)"><i class="icon-doc"></i> New</button>
+            <button type="button" class="btn btn-info btn-sm update-all-movies" (click)="updateAllMovies()"><i class="icon-refresh"></i> Update All</button>
+        </header>
+        <div class="bd-example">
+            <table class="table" id="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>IMDB ID</th>
+                    <th>Title</th>
+                    <th class="text-center"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let movie of movies;let i = index">
+                        <th scope="row" class="align-middle">{{ i+1 }}</th>
+                        <td class="align-middle">{{ movie.imdb_id }}</td>
+                        <td class="align-middle">{{ movie.title }}</td>
+                        <td class="text-center button-float">
+                            <button id="update-{{ movie.imdb_id }}" data-id="{{ movie.imdb_id }}" type="button" class="btn btn-info btn-sm update-movie" (click)="updateMovie(movie.imdb_id, i)"><i class="icon-refresh"></i> Update</button>
+                            &nbsp;
+                            <button id="delete-{{ movie.imdb_id }}" data-id="{{ movie.imdb_id }}" type="button" class="btn btn-danger btn-sm delete-movie" (click)="deleteMovie(movie.imdb_id, i)"><i class="icon-trash"></i> Delete</button>
+                        </td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<ng-template #create>
+    <form novalidate id="needs-validation" #movieForm="ngForm">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add / Update Movie</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div id="modal-alert"></div>
+            <div class="form-group">
+                <label for="imdb-id" class="form-control-label">IMDB ID:</label>
+                <input type="text" class="form-control" required [(ngModel)]="imdb_id" name="imdb_id"> 
+                <div class="invalid-feedback">
+                    Please provide a IMDB ID.
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalRef.hide()" [disabled]="is_adding">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="is_adding" (click)="addMovie()">Save changes</button>
+        </div>
+    </form>
+</ng-template>
